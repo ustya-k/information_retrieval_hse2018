@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <form>
+        <b>Запрос:</b>
+        <input type="text" name="query"></input>
+        <br>
+        <b>Метод поиска:</b>
+        <br>
+        <input type="radio" name="method" value="word2vec" id="word2vec" />
+        <label for="word2vec">Word2Vec</label>
+        <input type="radio" name="method" value="doc2vec" id="word2vec" />
+        <label for="doc2vec">Doc2Vec</label>
+        <input type="radio" name="method" value="inverted_index" id="inverted_index" />
+        <label for="inverted_index">Inverted Index</label>
+        <br>
+        <b>Необходимое число объявлений:</b>
+        <input type="number" name="top" />
+        <br>
+        <br>
+        <input type="submit" value="Искать"></input>
+    </form>
+
+    <br>
+    {% if results %}
+    	{% if results == "None" %}
+    		Ничего не найдено по запросу <i>{{ query }}</i> :(
+    	{% else %}
+    	<b>Результаты поиска по запросу</b> <i>{{ query }}</i><b>:</b> <br>
+    	{% for result in results %}
+    		{% if result["header"] %} <b>Заголовок:</b> {{ result["header"] }} <br> {% endif %}
+    		{% if result["date"] %} <b>Дата размещения:</b> {{ result["date"] }} <br> {% endif %}
+    		{% if result["address"] %} <b>Адрес:</b> {{ result["address"] }} <br> {% endif %}
+    		{% if result["price"] %} <b>Цена:</b> {{ result["price"] }} <br> {% endif %}
+    		{% if result["contact"] %} <b>Контактное лицо:</b> {{ result["contact"] }} <br> {% endif %}
+    		<a href='https://www.avito.ru/{{ result["id"] }}'><b>Страница объявления</b> </a>
+    		<br> {% if result["text"] %} <b>Текст объявления:</b> {{ result["text"] }} <br> {% endif %} <br>
+    	{% endfor %}
+    	{% endif %}
+    {% endif %}
+</body>
+
+</html>
