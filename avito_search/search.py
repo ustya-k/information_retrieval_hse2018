@@ -1,6 +1,4 @@
-import os
-import re
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, request
 from exam import search
 
 
@@ -20,5 +18,4 @@ def get_results(args):
 
 
 if __name__ == '__main__':
-    app.run(host=os.getenv('IP', '0.0.0.0'),
-            port=int(os.getenv('PORT', 5000)))
+    app.run()
